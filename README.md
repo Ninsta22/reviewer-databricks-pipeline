@@ -14,7 +14,7 @@ From this second screenshot, now that the pandas dataframe is fully loaded, it i
 
 ### Transform
 
- Now, in this step, I begin transforming the data. First, I re-load the raw steam review data into a SparkSession, and convert the information to a Spark Dataframe. From here, I utilize Spark to transform the data to only include the columsn that were important. An important feature of Delta Lake is Schema Enforcement, so after the transformation, I needed to verify that when I save the transformed data into a new Delta Table, it still conforms to the Delta enforced schema. The benefit of consistency with the same data allowed for easier debugging.
+ Now, in this step, I begin transforming the data. First, I re-load the raw steam review data into a SparkSession, and convert the information to a Spark Dataframe. From here, I utilize Spark to transform the data to only include the columsn that were important, and columns where the weighted_vote_score is greater than 1. An important feature of Delta Lake is Schema Enforcement, so after the transformation, I needed to verify that when I save the transformed data into a new Delta Table, it still conforms to the Delta enforced schema. The benefit of consistency with the same data allowed for easier debugging.
 
 ![image](https://github.com/Ninsta22/reviewer-databricks-pipeline/assets/55768636/d4a78770-3e7a-41ba-8cbb-1bf15d5ecbc4)
 
@@ -26,7 +26,7 @@ Below, I am trying to evaluate concerns surrounding Steams Weighted Vote Score. 
 
 ### Workflow
 
-The following below shows all 3 files previously mentioned stitched together, in order to act as a total Steam Reviewer Pipeline. It will first read in whatever new files are added to Github, and then will be able to constantly create an updated Delta Table and graphic. As well, 
+The following below shows all 3 files previously mentioned stitched together, in order to act as a total Steam Reviewer Pipeline. It will first read in whatever new files are added to Github, and then will be able to constantly create an updated graphic. More importantly however, it will constantly be able to incorporate the contents of a new JSON File review into our totla raw steam review table, more importantly, have our transformed Delta table always updated with this information. As can be seen below, the Workflow is scheduled to run every week at a certain time, which means that it will have weekly updates to the Delta Table. This automates any future work necessary with the steam reviews.
 
 ![image](https://github.com/Ninsta22/reviewer-databricks-pipeline/assets/55768636/77cf3956-ced8-46f4-9fcb-028a804505cb)
 
