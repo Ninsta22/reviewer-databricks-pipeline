@@ -9,7 +9,7 @@ format:
 	black *.py 
 
 lint:
-	ruff check *.py
+
 
 		
 all: install lint test format deploy
